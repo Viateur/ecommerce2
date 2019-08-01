@@ -2,7 +2,12 @@ package com.ecommerce.microcomerce2.web.controller;
 import com.ecommerce.microcomerce2.model.Product;
 import com.ecommerce.microcomerce2.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.servlet.Servlet;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,8 +30,19 @@ public class ProductController {
 
     //ajouter un produit
     @PostMapping(value = "/Produits")
-    public void ajouterProduit(@RequestBody Product product) {
-        productDao.save(product);
+    public ResponseEntity<Void> ajouterProduit(@RequestBody Product product) {
+       Product product1 =  productDao.save(product);
+
+       if(product ==null){
+           return ResponseEntity.noContent().build();
+       }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(product.getId())
+                .toUri();
+
+       return ResponseEntity.created(location).build();
     }
 
 

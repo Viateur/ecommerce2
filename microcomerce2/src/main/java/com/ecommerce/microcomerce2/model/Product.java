@@ -1,18 +1,25 @@
 package com.ecommerce.microcomerce2.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Product {
     private int id;
     private String nom;
     private int prix;
+
+    // a ne pas afficher
+    private int prixAchat;
 
     //constructeur par défaut
     public Product() {
     }
 
     //constructeur pour nos tests
-    public Product(int id, String nom, int prix) {
-        this.id=id;
-        this.nom=nom;
-        this.prix=prix;
+    public Product(int id, String nom, int prix, int prixAchat) {
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.prixAchat = prixAchat;
     }
 
     public int getId() {
@@ -20,7 +27,7 @@ public class Product {
     }
 
     public void setId(int id) {
-        this.id=id;
+        this.id = id;
     }
 
     public String getNom() {
@@ -28,7 +35,7 @@ public class Product {
     }
 
     public void setNom(String nom) {
-        this.nom=nom;
+        this.nom = nom;
     }
 
     public int getPrix() {
@@ -36,15 +43,24 @@ public class Product {
     }
 
     public void setPrix(int prix) {
-        this.prix=prix;
+        this.prix = prix;
+    }
+
+    public int getPrixAchat() {
+        return prixAchat;
+    }
+
+    public void setPrixAchat(int prixAchat) {
+        this.prixAchat = prixAchat;
     }
 
     @Override
-    public String toString(){
-        return "Product{"+
+    public String toString() {
+        return "Product{" +
                 "id=" + id +
-                ", nom='"+ nom + '\'' +
-                ", prix=" + prix+ '}';
+                ", nom='" + nom + '\'' +
+                ", prix=" + prix +
+                '}';
     }
 }
 
